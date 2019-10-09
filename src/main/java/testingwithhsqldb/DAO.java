@@ -38,5 +38,21 @@ public class DAO {
 		// dernière ligne : on renvoie le résultat
 		return result;
 	}
+        
+        public void InsererProduit(Product produit) throws SQLException {
+
+		String sq = "INSERT INTO PRODUCT VALUES(?, ?, ?)";
+		try (Connection connection = myDataSource.getConnection();
+                     PreparedStatement statement = connection.prepareStatement(sq)
+                ) {
+			statement.setInt(1, produit.getId());
+			statement.setString(2, produit.getNom());
+			statement.setFloat(3, produit.getPrix());
+			statement.executeUpdate();
+
+		}
+		
+	}
+	
 	
 }
